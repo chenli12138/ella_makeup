@@ -32,6 +32,7 @@ const ImgDisplay: React.FC = () => {
         >
           <img
             src={src}
+            loading="lazy"
             alt={`Dynamic ${index}`}
             className="w-full h-full object-cover"
           />
