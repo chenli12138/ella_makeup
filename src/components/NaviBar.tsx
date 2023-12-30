@@ -1,6 +1,6 @@
 import logo from "../assets/logo-transparent-png.png"; // make sure the path to your logo is correct
-
-const NaviBar = () => {
+import { NavLink } from "react-router-dom";
+const NaviBar: React.FC = () => {
   return (
     <>
       {/* Logo container */}
@@ -10,24 +10,24 @@ const NaviBar = () => {
 
       {/* Navigation links container */}
       <div className=" bg-white flex justify-between h-[5vh] mx-8">
-        <a
-          href="/bridal"
+        <NavLink
+          to="/"
           className="text-center text-gray-800 font-thin w-1/4 text-2xl hover:animate-pulse"
         >
           Bridal
-        </a>
-        <a
-          href="/contact"
+        </NavLink>
+        <NavLink
+          to="/contact"
           className=" text-center text-gray-800 font-thin w-1/4 text-2xl hover:underline"
         >
           Contact
-        </a>
-        <a
-          href="/join-us"
+        </NavLink>
+        <NavLink
+          to="/join-us"
           className="text-center text-gray-800 font-thin w-1/4 text-2xl hover:underline "
         >
           Join Us
-        </a>
+        </NavLink>
       </div>
     </>
   );

@@ -30,3 +30,17 @@ interface ImportMeta {
 type ImageModule = {
   default: string;
 };
+
+type ContactFormState = {
+  name: string;
+  email: string;
+  phone: string;
+  weddingLocation: string;
+  duration: string;
+  followUpNeeded: boolean;
+};
+type ModalProps = {
+  checkStatus: boolean;
+  currentImg: string;
+  onClose: () => void;
+};
