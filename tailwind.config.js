@@ -6,6 +6,10 @@ export default {
       gridTemplateColumns: {
         fluid: "repeat(auto-fit,minmax(15rem,1fr))",
       },
+      fontFamily: {
+        sans: ["Montserrat"],
+        // Add other font families as needed
+      },
     },
   },
   plugins: [],

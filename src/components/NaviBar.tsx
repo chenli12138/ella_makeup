@@ -1,32 +1,115 @@
-import logo from "../assets/logo-transparent-png.png"; // make sure the path to your logo is correct
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import logo from "../assets/logo-transparent-png.png";
+import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
+import { HiMenu, HiX } from "react-icons/hi"; // Import icons for menu and close
+
 const NaviBar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      // When opening the menu
+      document.body.style.overflow = "hidden";
+    } else {
+      // When closing the menu
+      document.body.style.overflow = "auto";
+    }
+  };
+  const getNavLinkClass = (path: string) => {
+    const resolved = useResolvedPath(path);
+    const match = useMatch({ path: resolved.pathname, end: true });
+
+    return match
+      ? "text-center text-gray-800 font-normal w-full text-2xl underline"
+      : "text-center text-gray-500 font-thin w-full text-2xl";
+  };
+
   return (
     <>
-      {/* Logo container */}
-      <div className=" bg-white flex items-center justify-center h-[10vh] min-h-[20rem]">
-        <img src={logo} alt="Logo" className="max-h-full" />
+      <div className="fixed top-0 left-0 right-0 bg-white sm:relative sm:flex sm:items-center sm:justify-center h-[10vh] sm:min-h-[20rem] z-40">
+        <div className="h-[10vh] flex justify-center">
+          <img src={logo} alt="Logo" className="max-h-full  min-h-[3rem]" />
+        </div>
+        <div
+          className="sm:hidden absolute top-[4vh] left-4"
+          onClick={toggleMenu}
+        >
+          <div className="relative bg-white">
+            <HiMenu
+              size={24}
+              className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
+                isMenuOpen
+                  ? "opacity-0 rotate-[-45deg]"
+                  : "opacity-100 rotate-0"
+              }`}
+            />
+            <HiX
+              size={24}
+              className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
+                isMenuOpen ? "opacity-100 rotate-45deg" : "opacity-0 rotate-0"
+              }`}
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Navigation links container */}
-      <div className=" bg-white flex justify-between h-[5vh] mx-8">
-        <NavLink
-          to="/"
-          className="text-center text-gray-800 font-thin w-1/4 text-2xl hover:animate-pulse"
+      <div>
+        <div
+          className={`sm:hidden fixed inset-0 top-[10vh] z-30 left-0 bg-white transition-all duration-700 ease-in-out ${
+            isMenuOpen ? "opacity-100 h-screen" : "opacity-0 h-0"
+          }`}
         >
+          <div
+            className={`flex flex-col items-center justify-center  gap-6 ${
+              isMenuOpen ? "h-[80vh]" : " h-0"
+            }`}
+          >
+            <NavLink
+              to="/"
+              className="cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+              onClick={toggleMenu}
+            >
+              BRIDAL
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className="cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+              onClick={toggleMenu}
+            >
+              CONTACT
+            </NavLink>
+            <NavLink
+              to="/about-us"
+              className="cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+              onClick={toggleMenu}
+            >
+              ABOUT US
+            </NavLink>
+            <NavLink
+              to="/join-us"
+              className="cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+              onClick={toggleMenu}
+            >
+              SERVICE & PRICING
+            </NavLink>
+          </div>
+        </div>
+      </div>
+
+      {/* Existing Navigation Links for larger screens */}
+      <div className="bg-white sm:flex justify-between h-[5vh] mx-8 hidden">
+        <NavLink to="/" className={getNavLinkClass("/")}>
           Bridal
         </NavLink>
-        <NavLink
-          to="/contact"
-          className=" text-center text-gray-800 font-thin w-1/4 text-2xl hover:underline"
-        >
+        <NavLink to="/contact" className={getNavLinkClass("/contact")}>
           Contact
         </NavLink>
-        <NavLink
-          to="/join-us"
-          className="text-center text-gray-800 font-thin w-1/4 text-2xl hover:underline "
-        >
-          Join Us
+        <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
+          About Us
+        </NavLink>
+        <NavLink to="/join-us" className={getNavLinkClass("/join-us")}>
+          Services & Pricing
         </NavLink>
       </div>
     </>

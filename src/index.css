@@ -1,3 +1,10 @@
+/* First, import the Montserrat font */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+
+/* Then, include your Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Followed by any additional custom CSS */
+/* ... */

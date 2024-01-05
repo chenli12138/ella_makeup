@@ -39,8 +39,3 @@ type ContactFormState = {
   duration: string;
   followUpNeeded: boolean;
 };
-type ModalProps = {
-  checkStatus: boolean;
-  currentImg: string;
-  onClose: () => void;
-};

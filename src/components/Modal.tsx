@@ -1,31 +1,51 @@
 import { useEffect, useState } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 interface ModalProps {
   checkStatus: boolean;
   onClose: () => void;
-  currentImg: string;
+  currentImg: number;
+  imgArray: {
+    full: string;
+    blurred: string;
+  }[];
 }
 
 const Modal = (props: ModalProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(props.currentImg);
 
-  const handleBodyScroll = (state: boolean) => {
-    document.body.style.overflow = state ? "hidden" : "visible";
-  };
+  useEffect(() => {
+    setCurrentIndex(props.currentImg); // Update currentIndex when props.currentImg changes
+  }, [props.currentImg]);
 
   useEffect(() => {
     if (props.checkStatus) {
-      setIsVisible(true); // Trigger the fade-in effect
-      handleBodyScroll(true);
-    } else {
-      handleBodyScroll(false);
+      setIsVisible(true);
     }
   }, [props.checkStatus]);
 
-  // Function to handle closing the modal and fade out effect
+  if (isVisible) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "visible";
+  }
+
+  const showPrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const showNext = () => {
+    if (currentIndex < props.imgArray.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(() => props.onClose(), 300); // Wait for fade-out to complete before closing
+    setTimeout(() => props.onClose(), 300);
   };
 
   if (!isVisible && !props.checkStatus) return null;
@@ -33,17 +53,39 @@ const Modal = (props: ModalProps) => {
   return (
     <div
       onClick={handleClose}
-      className={`fixed top-0 right-0 w-screen h-screen z-10 flex justify-center items-center transition-opacity ease-in duration-300 ${
-        isVisible ? "bg-white opacity-100 " : "opacity-0"
+      className={`fixed inset-0 z-10 flex justify-between items-center transition-opacity ease-in duration-300 ${
+        isVisible ? " bg-white bg-opacity-100" : "opacity-0"
       }`}
     >
-      <div className="z-20 p-4" onClick={(e) => e.stopPropagation()}>
+      <HiChevronLeft
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          showPrev();
+        }}
+        className={`ml-2 sm:ml-4 cursor-pointer z-20 scale-90 opacity-60 ${
+          currentIndex > 0 ? "opacity-100" : "opacity-0"
+        }`}
+        size={40}
+      />
+
+      <div className="z-20 px-4">
         <img
-          src={props.currentImg}
-          alt="NFT Preview"
+          src={props.imgArray[currentIndex].full}
+          alt="Image Preview"
           className="max-h-[85vh] max-w-[80vw] h-auto w-auto mx-auto"
         />
       </div>
+
+      <HiChevronRight
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          showNext();
+        }}
+        className={`mr-2 sm:mr-4 cursor-pointer z-20 scale-90 opacity-60 ${
+          currentIndex < props.imgArray.length - 1 ? "opacity-100" : "opacity-0"
+        }`}
+        size={40}
+      />
     </div>
   );
 };

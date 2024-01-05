@@ -12,7 +12,7 @@ const blurredImageModules = import.meta.glob(
 const ImgDisplay: React.FC = () => {
   const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [currentModal, setCurrent] = useState<string>("");
+  const [currentModal, setCurrent] = useState<number>(0);
 
   useEffect(() => {
     const loadImages = async () => {
@@ -41,18 +41,19 @@ const ImgDisplay: React.FC = () => {
     loadImages();
     console.log(images);
   }, []);
-  const openModal = (srcLink: string) => {
+
+  const openModal = (index: number) => {
     setModalOpen(true);
-    setCurrent(srcLink);
+    setCurrent(index);
   };
 
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 mx-4">
+      <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 sm:mx-0 mx-2">
         {images.map((src, index) => (
           <div
             key={index}
-            className="w-full aspect-w-3 aspect-h-4 overflow-hidden relative"
+            className="w-full aspect-w-1 aspect-h-1 overflow-hidden relative"
           >
             <LazyLoadImage
               alt={`Image ${index}`}
@@ -64,7 +65,7 @@ const ImgDisplay: React.FC = () => {
             />
             <div
               className="absolute top-0 left-0 hover:bg-black/10 hover:cursor-pointer w-full h-full "
-              onClick={() => openModal(src.full)}
+              onClick={() => openModal(index)}
             ></div>
           </div>
         ))}
@@ -73,6 +74,7 @@ const ImgDisplay: React.FC = () => {
         checkStatus={modalOpen}
         onClose={() => setModalOpen(false)}
         currentImg={currentModal}
+        imgArray={images}
       />
     </>
   );
