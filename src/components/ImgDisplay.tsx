@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Modal from "./Modal";
+import { motion } from "framer-motion";
 
-// Import both full and blurred images
 const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
 const blurredImageModules = import.meta.glob(
   "../assets/pics/blurred/*.{jpg,png,JPG}"
@@ -47,27 +47,37 @@ const ImgDisplay: React.FC = () => {
     setCurrent(index);
   };
 
+  const variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
       <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 sm:mx-0 mx-2">
         {images.map((src, index) => (
-          <div
+          <motion.div
             key={index}
-            className="w-full aspect-w-1 aspect-h-1 overflow-hidden relative"
+            variants={variants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: index * 0.1 }}
+            className="w-full aspect-w-3 aspect-h-4 overflow-hidden relative"
           >
             <LazyLoadImage
               alt={`Image ${index}`}
-              src={src.full} // Make sure src.full is the correct path
+              src={src.full}
               placeholderSrc={src.blurred}
               effect="blur"
               wrapperClassName="w-full h-full object-cover"
               className="w-full h-full object-cover"
             />
             <div
-              className="absolute top-0 left-0 hover:bg-black/10 hover:cursor-pointer w-full h-full "
+              className="absolute top-0 left-0 hover:bg-black/10 hover:cursor-pointer w-full h-full"
               onClick={() => openModal(index)}
             ></div>
-          </div>
+          </motion.div>
         ))}
       </div>
       <Modal

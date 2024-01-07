@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../assets/logo-transparent-png.png";
 import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi"; // Import icons for menu and close
+import { Link } from "react-router-dom";
 
 const NaviBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -21,15 +22,21 @@ const NaviBar: React.FC = () => {
     const match = useMatch({ path: resolved.pathname, end: true });
 
     return match
-      ? "text-center text-gray-800 font-normal w-full text-2xl underline"
-      : "text-center text-gray-500 font-thin w-full text-2xl";
+      ? "text-center text-gray-800 font-normal w-full text-2xl underline underline-offset-8 hover:animate-pulse"
+      : "text-center text-gray-500 font-thin w-full text-2xl hover:animate-pulse";
   };
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-white sm:relative sm:flex sm:items-center sm:justify-center h-[10vh] sm:min-h-[20rem] z-40">
-        <div className="h-[10vh] flex justify-center">
-          <img src={logo} alt="Logo" className="max-h-full  min-h-[3rem]" />
+      <div className="fixed top-0 left-0 right-0 bg-white sm:relative flex sm:items-center justify-center h-[10vh] sm:h-[15vh] sm:min-h-[10rem] z-40">
+        <div className="h-[10vh] ">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Ella Makeup, Sydney Best asian wedding makeup artist"
+              className="max-h-full  min-h-[3rem] cursor-pointer"
+            />
+          </Link>
         </div>
         <div
           className="sm:hidden absolute top-[4vh] left-4"

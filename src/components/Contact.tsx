@@ -38,7 +38,7 @@ const ContactUs: React.FC = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
@@ -50,7 +50,7 @@ const ContactUs: React.FC = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
@@ -62,7 +62,7 @@ const ContactUs: React.FC = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
@@ -74,7 +74,7 @@ const ContactUs: React.FC = () => {
             name="weddingLocation"
             value={formData.weddingLocation}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
@@ -85,7 +85,7 @@ const ContactUs: React.FC = () => {
             name="duration"
             value={formData.duration}
             onChange={handleChange}
-            className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="block appearance-none w-full bg-white border border-gray-200 bg-white text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           >
             <option value="">Select Duration</option>
             <option value="1-2 hours">1-2 hours</option>
@@ -101,7 +101,7 @@ const ContactUs: React.FC = () => {
               name="followUpNeeded"
               checked={formData.followUpNeeded}
               onChange={handleChange}
-              className="form-checkbox h-5 w-5 text-gray-600"
+              className="form-checkbox h-5 w-5 bg-white text-gray-600"
             />
             <span className="ml-2 text-gray-700">Do you need a follow-up?</span>
           </label>

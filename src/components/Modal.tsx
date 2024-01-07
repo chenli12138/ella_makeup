@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
 
 interface ModalProps {
   checkStatus: boolean;
@@ -53,7 +56,7 @@ const Modal = (props: ModalProps) => {
   return (
     <div
       onClick={handleClose}
-      className={`fixed inset-0 z-10 flex justify-between items-center transition-opacity ease-in duration-300 ${
+      className={`fixed inset-0 z-50 justify-center flex sm:justify-between items-center transition-opacity ease-in duration-300 ${
         isVisible ? " bg-white bg-opacity-100" : "opacity-0"
       }`}
     >
@@ -62,17 +65,16 @@ const Modal = (props: ModalProps) => {
           e.stopPropagation();
           showPrev();
         }}
-        className={`ml-2 sm:ml-4 cursor-pointer z-20 scale-90 opacity-60 ${
+        className={`hidden sm:block ml-2 sm:ml-4 cursor-pointer z-20 scale-90 opacity-60 ${
           currentIndex > 0 ? "opacity-100" : "opacity-0"
         }`}
         size={40}
       />
-
-      <div className="z-20 px-4">
+      <div className="z-20 px-4 hidden sm:block">
         <img
           src={props.imgArray[currentIndex].full}
           alt="Image Preview"
-          className="max-h-[85vh] max-w-[80vw] h-auto w-auto mx-auto"
+          className="max-h-[70vh] max-w-[80vw] h-auto w-auto"
         />
       </div>
 
@@ -81,11 +83,19 @@ const Modal = (props: ModalProps) => {
           e.stopPropagation();
           showNext();
         }}
-        className={`mr-2 sm:mr-4 cursor-pointer z-20 scale-90 opacity-60 ${
+        className={`hidden sm:block mr-2 sm:mr-4 cursor-pointer z-20 scale-90 opacity-60 ${
           currentIndex < props.imgArray.length - 1 ? "opacity-100" : "opacity-0"
         }`}
         size={40}
       />
+
+      <Swiper className="sm:hidden mt-10" initialSlide={props.currentImg}>
+        {props.imgArray.map((img, index) => (
+          <SwiperSlide key={index}>
+            <img src={img.full} alt={`Image ${index}`} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
