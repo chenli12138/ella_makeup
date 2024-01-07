@@ -85,7 +85,7 @@ const ContactUs: React.FC = () => {
             name="duration"
             value={formData.duration}
             onChange={handleChange}
-            className="block appearance-none w-full bg-white border border-gray-200 bg-white text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="block appearance-none w-full border border-gray-200 bg-white text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           >
             <option value="">Select Duration</option>
             <option value="1-2 hours">1-2 hours</option>

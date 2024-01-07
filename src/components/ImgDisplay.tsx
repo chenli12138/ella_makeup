@@ -13,7 +13,29 @@ const ImgDisplay: React.FC = () => {
   const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentModal, setCurrent] = useState<number>(0);
+  const [visibleImages, setVisibleImages] = useState(6); // Initial number of images to display
 
+  // Function to load more images
+  const loadMoreImages = () => {
+    if (visibleImages < images.length) {
+      setVisibleImages(visibleImages + 3); // Load 3 more images
+    }
+  };
+
+  // Scroll event handler
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    )
+      return;
+    loadMoreImages();
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [visibleImages, images]);
   useEffect(() => {
     const loadImages = async () => {
       const fullPaths = Object.keys(fullImageModules);
@@ -55,14 +77,14 @@ const ImgDisplay: React.FC = () => {
   return (
     <>
       <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 sm:mx-0 mx-2">
-        {images.map((src, index) => (
+        {images.slice(0, visibleImages).map((src, index) => (
           <motion.div
             key={index}
             variants={variants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
             className="w-full aspect-w-3 aspect-h-4 overflow-hidden relative"
           >
             <LazyLoadImage
