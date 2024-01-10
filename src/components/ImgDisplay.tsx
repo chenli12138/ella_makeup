@@ -61,7 +61,6 @@ const ImgDisplay: React.FC = () => {
     };
 
     loadImages();
-    console.log(images);
   }, []);
 
   const openModal = (index: number) => {
