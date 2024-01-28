@@ -22,8 +22,8 @@ const NaviBar: React.FC = () => {
     const match = useMatch({ path: resolved.pathname, end: true });
 
     return match
-      ? "text-center text-gray-800 font-normal w-full text-2xl underline underline-offset-8 hover:animate-pulse"
-      : "text-center text-gray-500 font-thin w-full text-2xl hover:animate-pulse";
+      ? "text-center text-gray-800 font-bold w-full text-2xl relative after:content-[''] after:block after:w-full after:h-[2px] after:bg-black after:absolute after:top-0 after:left-0 hover:font-bold mx-2"
+      : "text-center text-gray-500 font-thin w-full text-2xl relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-black after:absolute after:top-0 after:left-0 hover:font-bold hover:after:w-full transition-all duration-300";
   };
 
   return (
@@ -94,7 +94,7 @@ const NaviBar: React.FC = () => {
               ABOUT US
             </NavLink>
             <NavLink
-              to="/join-us"
+              to="/price"
               className="cursor-pointer hover:scale-125 transition ease-in-out duration-300"
               onClick={toggleMenu}
             >
@@ -105,7 +105,7 @@ const NaviBar: React.FC = () => {
       </div>
 
       {/* Existing Navigation Links for larger screens */}
-      <div className="bg-white sm:flex justify-between h-[5vh] mx-8 hidden">
+      <div className="bg-white sm:flex justify-between h-[5vh] mx-8 hidden font-play">
         <NavLink to="/" className={getNavLinkClass("/")}>
           Bridal
         </NavLink>
@@ -115,7 +115,7 @@ const NaviBar: React.FC = () => {
         <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
           About Us
         </NavLink>
-        <NavLink to="/join-us" className={getNavLinkClass("/join-us")}>
+        <NavLink to="/price" className={getNavLinkClass("/price")}>
           Services & Pricing
         </NavLink>
       </div>
