@@ -15,7 +15,7 @@ const AboutUs = () => {
 
   return (
     <>
-      <div className="mx-auto sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 ">
+      <div className="mx-auto sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 md:mt-[15vh]">
         <div className="w-full md:w-1/2 h-[80vh] md:h-auto lg:max-w-lg xl:max-w-xl object-contain">
           <img src={portrait} alt="Ella makeup portrait" />
         </div>

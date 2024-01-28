@@ -124,7 +124,7 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12 sm:mt-20">
+    <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12 sm:mt-20 md:mt-[15vh]">
       <h1 className="block sm:hidden text-4xl mx-auto text-center mb-8 font-medium">
         Contact us
       </h1>

@@ -18,28 +18,57 @@ const NaviBar: React.FC = () => {
     }
   };
   const getNavLinkClass = (path: string) => {
-    const resolved = useResolvedPath(path);
-    const match = useMatch({ path: resolved.pathname, end: true });
+    const resolvedHome = useResolvedPath("/");
+    const matchHome = useMatch({ path: resolvedHome.pathname, end: true });
 
-    return match
-      ? "text-center text-gray-800 font-bold w-full text-2xl relative after:content-[''] after:block after:w-full after:h-[2px] after:bg-black after:absolute after:top-0 after:left-0 hover:font-bold mx-2"
-      : "text-center text-gray-500 font-thin w-full text-2xl relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-black after:absolute after:top-0 after:left-0 hover:font-bold hover:after:w-full transition-all duration-300";
+    const resolvedPath = useResolvedPath(path);
+    const matchPath = useMatch({ path: resolvedPath.pathname, end: true });
+
+    // Base styles
+    let baseStyle = "text-center font-thin w-full text-lg lg:text-2xl";
+
+    // Style for active link
+    let activeStyle = "font-normal underline underline-offset-8";
+
+    // When on the home page, make all links white
+    if (matchHome) {
+      return `${baseStyle} text-white ${matchPath ? activeStyle : ""}`;
+    }
+
+    // When on other pages, make the active link black and others gray
+    return `${baseStyle} ${
+      matchPath ? `text-black ${activeStyle}` : "text-gray-600"
+    }`;
   };
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-white sm:relative flex sm:items-center justify-center h-[10vh] sm:h-[15vh] sm:min-h-[10rem] z-40">
-        <div className="h-[10vh] ">
+      <div className="fixed md:absolute top-0 left-0 right-0 bg-white md: bg-transparent flex items-center justify-center md:justify-between h-[10vh] sm:min-h-[10rem] z-40 md:mx-4 lg:mx-16">
+        <div className="h-[10vh] md:h-[9vh] ">
           <Link to="/">
             <img
               src={logo}
               alt="Ella Makeup, Sydney Best asian wedding makeup artist"
-              className="max-h-full  min-h-[3rem] cursor-pointer"
+              className="max-h-full  min-h-[3rem] cursor-pointer bg-transparent text-white"
             />
           </Link>
         </div>
+        <div className="md:flex justify-between hidden whitespace-nowrap gap-6">
+          <NavLink to="/" className={getNavLinkClass("/")}>
+            BRIDAL
+          </NavLink>
+          <NavLink to="/contact" className={getNavLinkClass("/contact")}>
+            CONTACT
+          </NavLink>
+          <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
+            ABOUT US
+          </NavLink>
+          <NavLink to="/price" className={getNavLinkClass("/price")}>
+            PRICING
+          </NavLink>
+        </div>
         <div
-          className="sm:hidden absolute top-[4vh] left-4"
+          className="md:hidden absolute sm:top-[6vh] top-[4vh] left-4"
           onClick={toggleMenu}
         >
           <div className="relative bg-white">
@@ -63,7 +92,7 @@ const NaviBar: React.FC = () => {
 
       <div>
         <div
-          className={`sm:hidden fixed inset-0 top-[10vh] z-30 left-0 bg-white transition-all duration-700 ease-in-out ${
+          className={`md:hidden fixed inset-0 top-[10vh] z-30 left-0 bg-white transition-all duration-700 ease-in-out ${
             isMenuOpen ? "opacity-100 h-screen" : "opacity-0 h-0"
           }`}
         >
@@ -102,22 +131,22 @@ const NaviBar: React.FC = () => {
             </NavLink>
           </div>
         </div>
-      </div>
 
-      {/* Existing Navigation Links for larger screens */}
-      <div className="bg-white sm:flex justify-between h-[5vh] mx-8 hidden font-play">
-        <NavLink to="/" className={getNavLinkClass("/")}>
-          Bridal
-        </NavLink>
-        <NavLink to="/contact" className={getNavLinkClass("/contact")}>
-          Contact
-        </NavLink>
-        <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
-          About Us
-        </NavLink>
-        <NavLink to="/price" className={getNavLinkClass("/price")}>
-          Services & Pricing
-        </NavLink>
+        {/* Existing Navigation Links for larger screens
+        <div className="sm:flex justify-between h-[5vh] mx-8 hidden">
+          <NavLink to="/" className={getNavLinkClass("/")}>
+            Bridal
+          </NavLink>
+          <NavLink to="/contact" className={getNavLinkClass("/contact")}>
+            Contact
+          </NavLink>
+          <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
+            About Us
+          </NavLink>
+          <NavLink to="/price" className={getNavLinkClass("/price")}>
+            Services & Pricing
+          </NavLink>
+        </div> */}
       </div>
     </>
   );

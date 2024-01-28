@@ -3,17 +3,21 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
+import Hero from "./Hero";
 
 const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
 const blurredImageModules = import.meta.glob(
   "../assets/pics/blurred/*.{jpg,png,JPG}"
 );
+const heroImageModules = import.meta.glob("../assets/hero/*.{jpg,png,JPG}");
 
 const ImgDisplay: React.FC = () => {
   const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentModal, setCurrent] = useState<number>(0);
-  const [visibleImages, setVisibleImages] = useState(6); // Initial number of images to display
+  const [visibleImages, setVisibleImages] = useState(9); // Initial number of images to display
+  const [heroImages, setHeroImages] = useState<string[]>([]);
+  const [currentHeroImage, setCurrentHeroImage] = useState<string>("");
 
   // Function to load more images
   const loadMoreImages = useCallback(() => {
@@ -41,6 +45,7 @@ const ImgDisplay: React.FC = () => {
     const loadImages = async () => {
       const fullPaths = Object.keys(fullImageModules);
       const blurredPaths = Object.keys(blurredImageModules);
+      const paths = Object.keys(heroImageModules);
 
       const importedFullImages = await Promise.all(
         fullPaths.map(
@@ -59,10 +64,30 @@ const ImgDisplay: React.FC = () => {
       }));
 
       setImages(srcs);
+      const importedImages = await Promise.all(
+        paths.map(
+          (path) => heroImageModules[path]() as Promise<{ default: string }>
+        )
+      );
+      const heroSrcs = importedImages.map((module) => module.default);
+      setHeroImages(heroSrcs);
+      setCurrentHeroImage(
+        heroSrcs[Math.floor(Math.random() * heroSrcs.length)]
+      );
     };
-
+    console.log(currentHeroImage);
     loadImages();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage(
+        heroImages[Math.floor(Math.random() * heroImages.length)]
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [heroImages]);
 
   const openModal = (index: number) => {
     setModalOpen(true);
@@ -76,6 +101,10 @@ const ImgDisplay: React.FC = () => {
 
   return (
     <>
+      {currentHeroImage && (
+        <Hero src={currentHeroImage} alt="Hero background image" />
+      )}
+
       <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 sm:mx-0 mx-2">
         {images.slice(0, visibleImages).map((src, index) => (
           <motion.div
