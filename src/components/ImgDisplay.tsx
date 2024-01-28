@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Modal from "./Modal";
@@ -16,26 +16,27 @@ const ImgDisplay: React.FC = () => {
   const [visibleImages, setVisibleImages] = useState(6); // Initial number of images to display
 
   // Function to load more images
-  const loadMoreImages = () => {
+  const loadMoreImages = useCallback(() => {
     if (visibleImages < images.length) {
-      setVisibleImages(visibleImages + 3); // Load 3 more images
+      setVisibleImages((prevVisibleImages) => prevVisibleImages + 3);
     }
-  };
+  }, [visibleImages, images.length]);
 
   // Scroll event handler
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    )
-      return;
-    loadMoreImages();
-  };
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 100
+    ) {
+      loadMoreImages();
+    }
+  }, [loadMoreImages]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [visibleImages, images]);
+  }, [handleScroll]);
+
   useEffect(() => {
     const loadImages = async () => {
       const fullPaths = Object.keys(fullImageModules);

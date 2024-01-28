@@ -4,12 +4,23 @@ import { Store } from "react-notifications-component";
 import CustomInput from "./CustomInput";
 
 const ContactUs: React.FC = () => {
+  const getFormattedTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = (today.getMonth() + 1).toString();
+    let day = today.getDate().toString();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return `${year}-${month}-${day}`;
+  };
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     weddingLocation: "",
-    weddingDate: "",
+    weddingDate: getFormattedTodayDate(),
     duration: "",
     bridemaid: 0,
     followUpNeeded: false,
@@ -113,7 +124,7 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12">
+    <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12 sm:mt-20">
       <h1 className="block sm:hidden text-4xl mx-auto text-center mb-8 font-medium">
         Contact us
       </h1>
@@ -206,11 +217,10 @@ const ContactUs: React.FC = () => {
             </span>
           </label>
         </div>
-
         {formData.bridemaidNeeded && (
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              How many bridemaids are needed:
+              How many bridemaids makeup needed:
             </label>
             <select
               name="duration"
@@ -218,7 +228,7 @@ const ContactUs: React.FC = () => {
               onChange={handleChange}
               className="block appearance-none w-full border border-gray-200 bg-white text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
-              <option value="">Select Duration</option>
+              <option value="">How many</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>

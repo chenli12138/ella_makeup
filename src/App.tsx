@@ -9,11 +9,15 @@ import "react-notifications-component/dist/theme.css";
 function App() {
   return (
     <Router>
-      <ReactNotifications />
-      <NaviBar />
-      <div className="pt-[10vh] sm:pt-0"> </div>
-      <RouteTransition />
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <ReactNotifications />
+        <NaviBar />
+        <div className="pt-[10vh] sm:pt-0"> </div>
+        <main className="flex-grow">
+          <RouteTransition />
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }
