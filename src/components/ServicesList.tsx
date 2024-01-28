@@ -45,7 +45,7 @@ const ServiceItem: FC<ServiceItemProps> = ({ title, children }) => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="px-12 pb-4 leading-loose">{children}</div>
+            <div className="px-12 pb-4 leading-[3]">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -70,7 +70,7 @@ const ServicesList: FC = () => {
         <ServiceItem title="Daily MakeUp And Hair">
           <ul className="list-disc pl-4">
             <li>Within Sydney area $350</li>
-            <li>Travel fee will be appiled if out of Sydeny area</li>
+            <li>Travel fee will be appiled based on distance.</li>
           </ul>
         </ServiceItem>
         <ServiceItem title="Travel Fee">
