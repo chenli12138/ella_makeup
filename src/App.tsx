@@ -12,7 +12,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <ReactNotifications />
         <NaviBar />
-        <div className="pt-[10vh] sm:pt-0"> </div>
+        {/* <div className="pt-[10vh] sm:pt-0"> </div> */}
         <main className="flex-grow">
           <RouteTransition />
         </main>

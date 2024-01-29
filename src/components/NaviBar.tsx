@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo-transparent-png.png";
 import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi"; // Import icons for menu and close
@@ -7,16 +7,18 @@ import { Link } from "react-router-dom";
 const NaviBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      // When opening the menu
-      document.body.style.overflow = "hidden";
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("no-scroll");
     } else {
-      // When closing the menu
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("no-scroll");
     }
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
   };
+
   const getNavLinkClass = (path: string) => {
     const resolvedHome = useResolvedPath("/");
     const matchHome = useMatch({ path: resolvedHome.pathname, end: true });
@@ -43,15 +45,19 @@ const NaviBar: React.FC = () => {
 
   return (
     <>
-      <div className="fixed md:absolute top-0 left-0 right-0 bg-white md: bg-transparent flex items-center justify-center md:justify-between h-[10vh] sm:min-h-[10rem] z-40 md:mx-4 lg:mx-16">
-        <div className="h-[10vh] md:h-[9vh] ">
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-40 md:mx-4 lg:mx-16 w-screen">
+        <div className="h-[10vh] md:h-[9vh] md:hidden ">
           <Link to="/">
             <img
               src={logo}
               alt="Ella Makeup, Sydney Best asian wedding makeup artist"
-              className="max-h-full  min-h-[3rem] cursor-pointer bg-transparent text-white"
+              className="max-h-full  min-h-[3rem] cursor-pointer"
             />
           </Link>
+        </div>
+        <div className="hidden md:block text-center text-white">
+          <span className="text-3xl">ELLA MAKEUP</span>
+          <p className="text-[10px] italic">ASIAN BRIDAL MAKEUP SYDNEY</p>
         </div>
         <div className="md:flex justify-between hidden whitespace-nowrap gap-6">
           <NavLink to="/" className={getNavLinkClass("/")}>
@@ -71,7 +77,7 @@ const NaviBar: React.FC = () => {
           className="md:hidden absolute sm:top-[6vh] top-[4vh] left-4"
           onClick={toggleMenu}
         >
-          <div className="relative bg-white">
+          <div className="relative bg-white cursor-pointer">
             <HiMenu
               size={24}
               className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
@@ -92,7 +98,7 @@ const NaviBar: React.FC = () => {
 
       <div>
         <div
-          className={`md:hidden fixed inset-0 top-[10vh] z-30 left-0 bg-white transition-all duration-700 ease-in-out ${
+          className={`md:hidden fixed inset-0 z-30 left-0 bg-white transition-all duration-700 ease-in-out ${
             isMenuOpen ? "opacity-100 h-screen" : "opacity-0 h-0"
           }`}
         >

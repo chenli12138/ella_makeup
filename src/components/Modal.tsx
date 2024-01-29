@@ -31,7 +31,7 @@ const Modal = (props: ModalProps) => {
   if (isVisible) {
     document.body.style.overflow = "hidden";
   } else {
-    document.body.style.overflow = "visible";
+    document.body.style.overflow = "auto";
   }
 
   const showPrev = () => {

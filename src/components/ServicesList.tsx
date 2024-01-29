@@ -54,7 +54,7 @@ const ServiceItem: FC<ServiceItemProps> = ({ title, children }) => {
 };
 const ServicesList: FC = () => {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:mt-[15vh]">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:mt-[15vh] mt-[10vh]">
       <div className="max-w-4xl mx-auto">
         <h1 className=" text-4xl font-light text-center mt-8 mb-16">
           Make-up And Hairstyling Service
