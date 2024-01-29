@@ -21,11 +21,13 @@ const Hero: React.FC<HeroProps> = ({ src, alt }) => {
         alt={alt}
         className="absolute top-0 left-0 h-full w-full object-cover"
       />
-      <HiChevronDoubleDown
-        className="absolute z-40 text-white bottom-20 left-1/2 animate-bounce cursor-pointer"
-        onClick={scrollToNextScreen}
-        size={30}
-      />
+      <div className="absolute inset-x-0 bottom-10 flex justify-center items-center z-40">
+        <HiChevronDoubleDown
+          className="text-white cursor-pointer animate-bounce"
+          onClick={scrollToNextScreen}
+          size={30}
+        />
+      </div>
     </div>
   );
 };
