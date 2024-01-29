@@ -104,8 +104,10 @@ const ImgDisplay: React.FC = () => {
       {currentHeroImage && (
         <Hero src={currentHeroImage} alt="Hero background image" />
       )}
-
-      <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-1 sm:mx-0 mx-2">
+      <div className="text-center text-2xl md:text-6xl md:my-40 my-10 font-play">
+        Gallery
+      </div>
+      <div className="container md:mx-auto grid gap-4 md:grid-cols-3 sm:grid-cols-1 min-h-screen">
         {images.slice(0, visibleImages).map((src, index) => (
           <motion.div
             key={index}
@@ -114,7 +116,7 @@ const ImgDisplay: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="w-full aspect-w-3 aspect-h-4 overflow-hidden relative"
+            className="w-full aspect-w-3 aspect-h-4 relative"
           >
             <LazyLoadImage
               alt={`Image ${index}`}
