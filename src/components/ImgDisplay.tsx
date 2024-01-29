@@ -4,6 +4,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
 import Hero from "./Hero";
+import ScrollToTop from "./ScrollBar";
 
 const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
 const blurredImageModules = import.meta.glob(
@@ -139,6 +140,7 @@ const ImgDisplay: React.FC = () => {
         currentImg={currentModal}
         imgArray={images}
       />
+      <ScrollToTop />
     </>
   );
 };
