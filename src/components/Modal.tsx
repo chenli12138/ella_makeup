@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 
 interface ModalProps {

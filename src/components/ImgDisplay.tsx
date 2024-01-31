@@ -10,7 +10,9 @@ const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
 const blurredImageModules = import.meta.glob(
   "../assets/pics/blurred/*.{jpg,png,JPG}"
 );
-const heroImageModules = import.meta.glob("../assets/hero/*.{jpg,png,JPG}");
+const heroImageModules = import.meta.glob(
+  "../assets/hero-landscape/*.{jpg,png,JPG}"
+);
 
 const ImgDisplay: React.FC = () => {
   const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
@@ -85,7 +87,7 @@ const ImgDisplay: React.FC = () => {
       setCurrentHeroImage(
         heroImages[Math.floor(Math.random() * heroImages.length)]
       );
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [heroImages]);

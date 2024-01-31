@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/logo-transparent-png.png";
 import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi"; // Import icons for menu and close
 import { Link } from "react-router-dom";
 
 const NaviBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const resolvedHome = useResolvedPath("/");
+  const matchHome = useMatch({ path: resolvedHome.pathname, end: true });
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -20,9 +21,6 @@ const NaviBar: React.FC = () => {
   };
 
   const getNavLinkClass = (path: string) => {
-    const resolvedHome = useResolvedPath("/");
-    const matchHome = useMatch({ path: resolvedHome.pathname, end: true });
-
     const resolvedPath = useResolvedPath(path);
     const matchPath = useMatch({ path: resolvedPath.pathname, end: true });
 
@@ -46,18 +44,25 @@ const NaviBar: React.FC = () => {
   return (
     <>
       <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-40 md:mx-4 lg:mx-16 w-screen">
-        <div className="h-[10vh] md:h-[9vh] md:hidden ">
+        <div
+          className={`h-[10vh] md:h-[9vh] md:hidden ${
+            matchHome ? "text-white" : "text-gray-800"
+          } text-center flex fle-col items-center`}
+        >
           <Link to="/">
-            <img
-              src={logo}
-              alt="Ella Makeup, Sydney Best asian wedding makeup artist"
-              className="max-h-full  min-h-[3rem] cursor-pointer"
-            />
+            <span className="text-2xl">ELLA MAKEUP</span>
+            <p className="text-[8px] italic">ASIAN BRIDAL MAKEUP SYDNEY</p>
           </Link>
         </div>
-        <div className="hidden md:block text-center text-white">
-          <span className="text-3xl">ELLA MAKEUP</span>
-          <p className="text-[10px] italic">ASIAN BRIDAL MAKEUP SYDNEY</p>
+        <div
+          className={`hidden md:block text-center ${
+            matchHome ? "text-white" : "text-gray-600"
+          }`}
+        >
+          <Link to="/">
+            <span className="text-3xl">ELLA MAKEUP</span>
+            <p className="text-[10px] italic">ASIAN BRIDAL MAKEUP SYDNEY</p>
+          </Link>
         </div>
         <div className="md:flex justify-between hidden whitespace-nowrap gap-6">
           <NavLink to="/" className={getNavLinkClass("/")}>
@@ -74,20 +79,20 @@ const NaviBar: React.FC = () => {
           </NavLink>
         </div>
         <div
-          className="md:hidden absolute sm:top-[6vh] top-[4vh] left-4"
+          className="md:hidden absolute sm:top-[6vh] top-[3vh] left-4"
           onClick={toggleMenu}
         >
           <div className="relative bg-white cursor-pointer">
             <HiMenu
-              size={24}
+              size={26}
               className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
                 isMenuOpen
                   ? "opacity-0 rotate-[-45deg]"
                   : "opacity-100 rotate-0"
-              }`}
+              } ${matchHome ? "text-white" : "text-gray-800"}`}
             />
             <HiX
-              size={24}
+              size={26}
               className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
                 isMenuOpen ? "opacity-100 rotate-45deg" : "opacity-0 rotate-0"
               }`}
@@ -137,22 +142,6 @@ const NaviBar: React.FC = () => {
             </NavLink>
           </div>
         </div>
-
-        {/* Existing Navigation Links for larger screens
-        <div className="sm:flex justify-between h-[5vh] mx-8 hidden">
-          <NavLink to="/" className={getNavLinkClass("/")}>
-            Bridal
-          </NavLink>
-          <NavLink to="/contact" className={getNavLinkClass("/contact")}>
-            Contact
-          </NavLink>
-          <NavLink to="/about-us" className={getNavLinkClass("/about-us")}>
-            About Us
-          </NavLink>
-          <NavLink to="/price" className={getNavLinkClass("/price")}>
-            Services & Pricing
-          </NavLink>
-        </div> */}
       </div>
     </>
   );

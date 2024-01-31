@@ -239,7 +239,7 @@ const ContactUs: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+          className="bg-gray-200 hover:bg-gray-800 hover:text-white text-gray-800  py-4 px-6 text-md rounded-full focus:outline-none cursor-pointer"
         >
           Submit
         </button>
