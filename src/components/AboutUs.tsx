@@ -15,25 +15,27 @@ const AboutUs = () => {
 
   return (
     <>
-      <div className="mx-auto sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 mt-[15vh]">
-        <div className="w-full md:w-1/2 h-[80vh] md:h-auto lg:max-w-lg xl:max-w-xl object-contain">
-          <img src={portrait} alt="Ella makeup portrait" />
-        </div>
-        <div className="text-center md:text-left md:w-2/3 lg:w-1/2">
-          <h1 className="text-4xl my-8 font-play">
-            Transforming Dreams into Stunning Realities
-          </h1>
-          <h1 className="text-2xl font-play  mt-4 text-right mb-12 mr-4">
-            - Ella's Makeup Artistry
-          </h1>
-          <p className="p-8">
-            Welcome to the artistry of Ella, a seasoned makeup artist with a
-            decade of experience in bringing bridal beauty dreams to life. Over
-            the course of her illustrious career, Ella has been the creative
-            force behind the stunning looks of over 500 brides, specializing in
-            Asian bridal makeup. Her passion for makeup artistry is not just a
-            profession, but a calling.
-          </p>
+      <div className="w-screen flex justify-center">
+        <div className="mx-auto max-w-screen-2xl sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 md:mt-[15vh] mt-[8vh]">
+          <div className="w-full md:w-1/2 md:h-auto lg:max-w-lg xl:max-w-xl object-contain">
+            <img src={portrait} alt="Ella makeup portrait" />
+          </div>
+          <div className="text-center md:text-left md:w-2/3 lg:w-1/2">
+            <h1 className="text-4xl my-8 font-play">
+              Transforming Dreams into Stunning Realities
+            </h1>
+            <h1 className="text-2xl font-play  mt-4 text-right mb-12 mr-4">
+              - Ella's Makeup Artistry
+            </h1>
+            <p className="p-8">
+              Welcome to the artistry of Ella, a seasoned makeup artist with a
+              decade of experience in bringing bridal beauty dreams to life.
+              Over the course of her illustrious career, Ella has been the
+              creative force behind the stunning looks of over 500 brides,
+              specializing in Asian bridal makeup. Her passion for makeup
+              artistry is not just a profession, but a calling.
+            </p>
+          </div>
         </div>
       </div>
       <motion.div

@@ -1,6 +1,7 @@
 import { useState, FC, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronDown } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 type ServiceItemProps = {
   title: string;
@@ -104,6 +105,14 @@ const ServicesList: FC = () => {
             your address. (Price on the Receipt)
           </p>
         </ServiceItem>
+      </div>
+      <div className="flex justify-center my-20">
+        <Link
+          to="/contact"
+          className="bg-gray-200 hover:bg-gray-800 hover:text-white text-gray-800  py-4 px-6 text-md rounded-full focus:outline-none cursor-pointer"
+        >
+          Check availability
+        </Link>
       </div>
     </div>
   );
