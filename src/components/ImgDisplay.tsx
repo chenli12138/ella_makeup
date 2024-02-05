@@ -1,10 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
 import Hero from "./Hero";
 import ScrollToTop from "./ScrollBar";
+import ImageWithSkeleton from "./ImageWithSkeleton";
 
 const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
 const blurredImageModules = import.meta.glob(
@@ -107,7 +106,7 @@ const ImgDisplay: React.FC = () => {
       {currentHeroImage && (
         <Hero src={currentHeroImage} alt="Hero background image" />
       )}
-      <div className="text-center text-2xl md:text-6xl md:my-40 my-10 font-play">
+      <div className="text-center text-2xl md:text-6xl md:my-40 my-10 font-play text-gray-800">
         Gallery
       </div>
       <div className="container md:mx-auto grid gap-4 md:grid-cols-3 sm:grid-cols-1 min-h-screen">
@@ -119,15 +118,13 @@ const ImgDisplay: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="w-full aspect-w-3 aspect-h-4 relative"
+            className="w-full relative"
           >
-            <LazyLoadImage
+            <ImageWithSkeleton
               alt={`Image ${index}`}
               src={src.full}
-              placeholderSrc={src.blurred}
-              effect="blur"
-              wrapperClassName="w-full h-full object-cover"
-              className="w-full h-full object-cover"
+              className="w-full h-full"
+              imgClass="w-full h-full object-cover"
             />
             <div
               className="absolute top-0 left-0 hover:bg-black/10 hover:cursor-pointer w-full h-full"
