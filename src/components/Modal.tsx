@@ -16,6 +16,7 @@ interface ModalProps {
 const Modal = (props: ModalProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(props.currentImg);
+  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentIndex(props.currentImg); // Update currentIndex when props.currentImg changes
@@ -70,10 +71,13 @@ const Modal = (props: ModalProps) => {
         size={40}
       />
       <div className="z-20 px-4 hidden sm:block">
+        {!hasLoaded && <div className="skeleton w-full h-full"></div>}
         <img
           src={props.imgArray[currentIndex].full}
           alt="Image Preview"
-          className="max-h-[70vh] max-w-[80vw] h-auto w-auto"
+          className="max-h-[70vh] max-w-[70vw] h-auto w-auto"
+          style={{ display: hasLoaded ? "block" : "none" }}
+          onLoad={() => setHasLoaded(true)}
         />
       </div>
 

@@ -32,7 +32,7 @@ const ScrollToTop: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed md:bottom-10 bottom-4 md:right-10 right-4 z-50 cursor-pointer"
+      className="fixed md:bottom-10 bottom-4 md:right-10 right-4 z-40 cursor-pointer"
       onClick={scrollToTop}
       variants={containerVariants}
       initial="hidden"
