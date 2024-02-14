@@ -17,7 +17,7 @@ const ImgDisplay: React.FC = () => {
   const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentModal, setCurrent] = useState<number>(0);
-  const [visibleImages, setVisibleImages] = useState(9); // Initial number of images to display
+  const [visibleImages, setVisibleImages] = useState(40); // Initial number of images to display
   const [heroImages, setHeroImages] = useState<string[]>([]);
   const [currentHeroImage, setCurrentHeroImage] = useState<string>("");
 
@@ -117,7 +117,7 @@ const ImgDisplay: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ duration: 0.6 }}
             className="w-full relative"
           >
             <ImageWithSkeleton

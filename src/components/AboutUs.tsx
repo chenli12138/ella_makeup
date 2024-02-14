@@ -15,7 +15,7 @@ const AboutUs = () => {
 
   return (
     <>
-      <div className="w-screen flex justify-center">
+      <div className="w-full flex justify-center">
         <div className="mx-auto max-w-screen-2xl sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 md:mt-[15vh] mt-[8vh]">
           <div className="w-full md:w-1/2 md:h-auto lg:max-w-lg xl:max-w-xl object-contain">
             <img src={portrait} alt="Ella makeup portrait" />
