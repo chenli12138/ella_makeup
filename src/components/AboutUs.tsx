@@ -1,4 +1,4 @@
-import portrait from "../assets/portrait-min.jpg";
+import portrait from "../assets/portrait-min.JPG";
 import logo from "../assets/svg/makeup.svg";
 import miror from "../assets/svg/mirror.svg";
 import wedding from "../assets/svg/ring.svg";
