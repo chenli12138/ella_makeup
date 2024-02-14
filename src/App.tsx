@@ -13,7 +13,7 @@ function App() {
         <ReactNotifications />
         <NaviBar />
         {/* <div className="pt-[10vh] sm:pt-0"> </div> */}
-        <main>
+        <main className="flex-grow">
           <RouteTransition />
         </main>
         <Footer />

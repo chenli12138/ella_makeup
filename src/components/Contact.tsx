@@ -250,11 +250,6 @@ const ContactUs: React.FC = () => {
         src="https://images.squarespace-cdn.com/content/v1/5d01e3871ec2780001f8f874/1651491227478-2SN5965CBX00ER53MSG5/Mitchelton-Wines-Wedding-0076.jpg?format=1500w"
         imgClass="max-w-xs sm:max-w-lg max-h-96 object-cover mt-8 mx-auto"
       />
-      {/* <img
-        src="https://images.squarespace-cdn.com/content/v1/5d01e3871ec2780001f8f874/1651491227478-2SN5965CBX00ER53MSG5/Mitchelton-Wines-Wedding-0076.jpg?format=1500w"
-        alt=""
-        className="max-w-xs sm:max-w-lg max-h-96 object-cover mt-8 mx-auto"
-      /> */}
     </div>
   );
 };

@@ -43,7 +43,7 @@ const NaviBar: React.FC = () => {
 
   return (
     <>
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-40 w-full">
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-20 w-full">
         <div
           className={`h-[10vh] md:h-[9vh] md:hidden ${
             matchHome ? "text-white" : "text-gray-800"
