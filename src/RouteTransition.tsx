@@ -10,8 +10,11 @@ function RouteTransition() {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]); // Run the effect on location change
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10); // Delay the scroll a bit
+  }, [location]);
+
   return (
     <TransitionGroup>
       <CSSTransition key={location.key} classNames="fade" timeout={300}>

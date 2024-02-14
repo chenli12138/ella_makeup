@@ -7,7 +7,7 @@ const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Determine the scroll position to start showing the button
-  const startVisible = 0.1; // 10% of the page height
+  const startVisible = 0.05; // 10% of the page height
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((value) => {
