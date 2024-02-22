@@ -7,10 +7,7 @@ interface ModalProps {
   checkStatus: boolean;
   onClose: () => void;
   currentImg: number;
-  imgArray: {
-    full: string;
-    blurred: string;
-  }[];
+  imgArray: string[];
 }
 
 const Modal = (props: ModalProps) => {
@@ -73,7 +70,7 @@ const Modal = (props: ModalProps) => {
       <div className="z-20 px-4 hidden sm:block">
         {!hasLoaded && <div className="skeleton w-full h-full"></div>}
         <img
-          src={props.imgArray[currentIndex].full}
+          src={props.imgArray[currentIndex]}
           alt="Image Preview"
           className="max-h-[70vh] max-w-[70vw] h-auto w-auto"
           style={{ display: hasLoaded ? "block" : "none" }}
@@ -95,7 +92,7 @@ const Modal = (props: ModalProps) => {
       <Swiper className="sm:hidden mt-10" initialSlide={props.currentImg}>
         {props.imgArray.map((img, index) => (
           <SwiperSlide key={index}>
-            <img src={img.full} alt={`Image ${index}`} />
+            <img src={img} alt={`Image ${index}`} />
           </SwiperSlide>
         ))}
       </Swiper>

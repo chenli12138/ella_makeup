@@ -31,8 +31,8 @@ const ContactUs: React.FC = () => {
     name: false,
     email: false,
     phone: false,
-    // ... other fields as necessary
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useRef<HTMLFormElement>(null);
   const handleChange = (
@@ -77,6 +77,7 @@ const ContactUs: React.FC = () => {
     if (!validateForm()) {
       return; // Stop the form submission if validation fails
     }
+    setIsSubmitting(true); // Disable the submit button
     const formElement = form.current;
     console.log(form);
     if (formElement instanceof HTMLFormElement) {
@@ -120,7 +121,13 @@ const ContactUs: React.FC = () => {
             console.log(error.text);
             // Handle errors (like showing an error message)
           }
-        );
+        )
+        .finally(() => {
+          setIsSubmitting(false); // Re-enable the submit button here, after the process is complete
+        });
+    } else {
+      // If formElement is not an instance of HTMLFormElement, you might want to handle that case.
+      setIsSubmitting(false); // Ensure button is re-enabled if form is not submitted
     }
   };
 
@@ -224,7 +231,7 @@ const ContactUs: React.FC = () => {
               How many bridemaids makeup needed:
             </label>
             <select
-              name="duration"
+              name="bridemaid"
               value={formData.bridemaid}
               onChange={handleChange}
               className="block appearance-none w-full border border-gray-200 bg-white text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -240,15 +247,20 @@ const ContactUs: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-gray-200 hover:bg-gray-800 hover:text-white text-gray-800  py-4 px-6 text-md rounded-full focus:outline-none cursor-pointer"
+          disabled={isSubmitting}
+          className={`py-4 px-6 text-md rounded-full focus:outline-none cursor-pointer ${
+            isSubmitting
+              ? "bg-gray-400 text-gray-800 cursor-not-allowed"
+              : "bg-gray-200 hover:bg-gray-800 hover:text-white text-gray-800 cursor-pointer"
+          }`}
         >
-          Submit
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>
       <ImageWithSkeleton
-        alt={``}
-        src="https://images.squarespace-cdn.com/content/v1/5d01e3871ec2780001f8f874/1651491227478-2SN5965CBX00ER53MSG5/Mitchelton-Wines-Wedding-0076.jpg?format=1500w"
-        imgClass="max-w-xs sm:max-w-lg max-h-96 object-cover mt-8 mx-auto"
+        alt={"contact-us"}
+        src={"contact.jpg"}
+        imgClass="max-w-xs sm:max-w-xl max-h-96 object-cover mt-8 mx-auto"
       />
     </div>
   );

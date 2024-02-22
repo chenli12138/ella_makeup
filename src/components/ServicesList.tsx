@@ -1,6 +1,7 @@
 import { useState, FC, ReactNode, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronDown } from "react-icons/hi2";
+import { HiMiniXMark } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
 type ServiceItemProps = {
@@ -53,6 +54,7 @@ const ServiceItem: FC<ServiceItemProps> = ({ title, children }) => {
     </div>
   );
 };
+
 const ServicesList: FC = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState<boolean>(true);
   useEffect(() => {
@@ -77,11 +79,15 @@ const ServicesList: FC = () => {
   return (
     <>
       {isOverlayVisible && (
-        <div className="z-50 bg-slate-600/70 fixed top-0 left-0 h-screen w-screen text-center items-center text-white ">
-          discount
-          <div className="cursor-pointer" onClick={handleCloseOverlay}>
-            X
-          </div>
+        <div className="z-50 bg-zinc-600/70 fixed top-0 left-0 h-screen w-screen flex justify-center items-center text-white">
+          <HiMiniXMark
+            className=" absolute top-8 right-8 cursor-pointer"
+            onClick={handleCloseOverlay}
+            size={30}
+          />
+          <Link to="/contact">
+            <img src="discount.gif" alt="5% discount for bridal makeup" />
+          </Link>
         </div>
       )}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:mt-[15vh] mt-[10vh] overflow-hidden">

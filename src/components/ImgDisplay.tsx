@@ -4,22 +4,30 @@ import { motion } from "framer-motion";
 import Hero from "./Hero";
 import ScrollToTop from "./ScrollBar";
 import ImageWithSkeleton from "./ImageWithSkeleton";
+import Preloader from "./Preloader";
 
 const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
-const blurredImageModules = import.meta.glob(
-  "../assets/pics/blurred/*.{jpg,png,JPG}"
-);
 const heroImageModules = import.meta.glob(
   "../assets/hero-landscape/*.{jpg,png,JPG}"
 );
 
 const ImgDisplay: React.FC = () => {
-  const [images, setImages] = useState<{ full: string; blurred: string }[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentModal, setCurrent] = useState<number>(0);
-  const [visibleImages, setVisibleImages] = useState(40); // Initial number of images to display
+  const [visibleImages, setVisibleImages] = useState(30); // Initial number of images to display
   const [heroImages, setHeroImages] = useState<string[]>([]);
   const [currentHeroImage, setCurrentHeroImage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading process
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // Wait for 2 seconds before marking loading as complete
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Function to load more images
   const loadMoreImages = useCallback(() => {
@@ -46,7 +54,6 @@ const ImgDisplay: React.FC = () => {
   useEffect(() => {
     const loadImages = async () => {
       const fullPaths = Object.keys(fullImageModules);
-      const blurredPaths = Object.keys(blurredImageModules);
       const paths = Object.keys(heroImageModules);
 
       const importedFullImages = await Promise.all(
@@ -54,16 +61,8 @@ const ImgDisplay: React.FC = () => {
           (path) => fullImageModules[path]() as Promise<{ default: string }>
         )
       );
-      const importedBlurredImages = await Promise.all(
-        blurredPaths.map(
-          (path) => blurredImageModules[path]() as Promise<{ default: string }>
-        )
-      );
 
-      const srcs = importedFullImages.map((module, index) => ({
-        full: module.default,
-        blurred: importedBlurredImages[index]?.default || module.default, // Fallback to full image if blurred image is not found
-      }));
+      const srcs = importedFullImages.map((module) => module.default);
 
       setImages(srcs);
       const importedImages = await Promise.all(
@@ -103,6 +102,7 @@ const ImgDisplay: React.FC = () => {
 
   return (
     <>
+      <Preloader isLoading={isLoading} />
       {currentHeroImage && (
         <Hero src={currentHeroImage} alt="Hero background image" />
       )}
@@ -122,7 +122,7 @@ const ImgDisplay: React.FC = () => {
           >
             <ImageWithSkeleton
               alt={`Image ${index}`}
-              src={src.full}
+              src={src}
               className="w-full h-full"
               imgClass="w-full h-full object-cover"
             />

@@ -43,11 +43,11 @@ const NaviBar: React.FC = () => {
 
   return (
     <>
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-20 w-full">
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-center md:justify-around h-[10vh] sm:min-h-[10rem] z-40 w-full">
         <div
           className={`h-[10vh] md:h-[9vh] md:hidden ${
             matchHome ? "text-white" : "text-gray-800"
-          } text-center flex fle-col items-center`}
+          }  text-center flex fle-col items-center`}
         >
           <Link to="/">
             <span className="text-2xl">ELLA MAKEUP</span>
@@ -93,7 +93,7 @@ const NaviBar: React.FC = () => {
             />
             <HiX
               size={26}
-              className={`absolute top-0 transition-all duration-500 ease-in-out transform ${
+              className={`absolute top-0 transition-all duration-500 ease-in-out transform z-50 ${
                 isMenuOpen ? "opacity-100 rotate-45deg" : "opacity-0 rotate-0"
               }`}
             />
