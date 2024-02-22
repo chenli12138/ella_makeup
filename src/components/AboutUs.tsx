@@ -76,7 +76,7 @@ const AboutUs = () => {
               Beauty Art, and Elegance Redefined
             </h2>
             <div className="mt-36 grid grid-cols-1 gap-6 text-center text-black md:grid-cols-3">
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={logo} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-lg">
                   Expertise with a Personal Touch
@@ -88,7 +88,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={miror} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-lg">A Detail-Oriented Approach</h3>
                 <p className="mt-1.5 leading-6">
@@ -97,7 +97,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={wedding} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-lg">More Than Just Weddings</h3>
                 <p className="mt-1.5 leading-6">
@@ -106,7 +106,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={quality} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-lg">The Promise of Quality</h3>
                 <p className="mt-1.5 leading-6">
@@ -115,7 +115,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={house} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-xl">
                   Join the Family of Beautiful Stories
@@ -126,7 +126,7 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-white px-6 py-8 shadow-md">
+              <div className="rounded-xl bg-white px-6 py-8 shadow-md hover:shadow-gray-400/80 transition duration-500 ease-in-out">
                 <img src={magic} alt="" className="mx-auto h-10 w-10" />
                 <h3 className="my-3 text-xl">Discover the Magic</h3>
                 <p className="mt-1.5 leading-6">
