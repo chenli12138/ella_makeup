@@ -79,7 +79,6 @@ const ContactUs: React.FC = () => {
     }
     setIsSubmitting(true); // Disable the submit button
     const formElement = form.current;
-    console.log(form);
     if (formElement instanceof HTMLFormElement) {
       emailjs
         .sendForm(
@@ -91,6 +90,7 @@ const ContactUs: React.FC = () => {
         .then(
           (result) => {
             console.log(result.text);
+            console.log(formElement);
             setFormData({
               name: "",
               email: "",
@@ -259,7 +259,7 @@ const ContactUs: React.FC = () => {
       </form>
       <ImageWithSkeleton
         alt={"contact-us"}
-        src={"contact.jpg"}
+        src={"./src/assets/contact.jpg"}
         imgClass="max-w-xs sm:max-w-xl max-h-96 object-cover mt-8 mx-auto"
       />
     </div>

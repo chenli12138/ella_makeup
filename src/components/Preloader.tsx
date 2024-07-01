@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -19,7 +18,7 @@ const Preloader: React.FC<PreloaderProps> = ({ isLoading }) => {
         >
           <BeatLoader
             color="#787878"
-            margin="10"
+            margin="10px"
             size={15}
             speedMultiplier={0.5}
           />
