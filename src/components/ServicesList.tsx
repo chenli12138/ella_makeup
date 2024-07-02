@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronDown } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import discountGif from "../assets/discount.gif";
 
 type ServiceItemProps = {
   title: string;
@@ -86,10 +87,7 @@ const ServicesList: FC = () => {
             size={30}
           />
           <Link to="/contact">
-            <img
-              src="./src/assets/discount.gif"
-              alt="5% discount for bridal makeup"
-            />
+            <img src={discountGif} alt="5% discount for bridal makeup" />
           </Link>
         </div>
       )}
