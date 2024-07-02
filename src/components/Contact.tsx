@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import { Store } from "react-notifications-component";
 import CustomInput from "./CustomInput";
 import ImageWithSkeleton from "./ImageWithSkeleton";
+import contactJpg from "../assets/contact.jpg";
 
 const ContactUs: React.FC = () => {
   const getFormattedTodayDate = () => {
@@ -259,7 +260,7 @@ const ContactUs: React.FC = () => {
       </form>
       <ImageWithSkeleton
         alt={"contact-us"}
-        src={"./src/assets/contact.jpg"}
+        src={contactJpg}
         imgClass="max-w-xs sm:max-w-xl max-h-96 object-cover mt-8 mx-auto"
       />
     </div>
