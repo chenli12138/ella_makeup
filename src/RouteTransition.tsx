@@ -1,10 +1,12 @@
-import ContactUs from "./components/Contact";
+import ContactUs from "./pages/Contact";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import ImgDisplay from "./components/ImgDisplay";
-import AboutUs from "./components/AboutUs";
+import ImgDisplay from "./pages/ImgDisplay";
+import AboutUs from "./pages/AboutUs";
 import { useEffect } from "react";
-import ServicesList from "./components/ServicesList";
+import ServicesList from "./pages/ServicesList";
+import PicOrder from "./pages/PicOrder";
+import LoginPage from "./pages/Login";
 
 function RouteTransition() {
   const location = useLocation();
@@ -23,6 +25,8 @@ function RouteTransition() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/price" element={<ServicesList />} />
+          <Route path="/pic-order" element={<PicOrder />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>

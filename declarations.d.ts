@@ -30,3 +30,10 @@ interface ImportMeta {
 type ImageModule = {
   default: string;
 };
+
+// Create a file named global.d.ts
+declare global {
+  interface Window {
+    cloudinary: any; // Replace 'any' with the actual type if known
+  }
+}
