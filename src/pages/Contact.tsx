@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Store } from "react-notifications-component";
-import CustomInput from "./CustomInput";
-import ImageWithSkeleton from "./ImageWithSkeleton";
+import CustomInput from "../components/CustomInput";
+import ImageWithSkeleton from "../components/ImageWithSkeleton";
 import contactJpg from "../assets/contact.jpg";
 
 const ContactUs: React.FC = () => {

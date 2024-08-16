@@ -1,18 +1,23 @@
 import { useEffect, useState, useCallback } from "react";
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 import { motion } from "framer-motion";
-import Hero from "./Hero";
-import ScrollToTop from "./ScrollBar";
-import ImageWithSkeleton from "./ImageWithSkeleton";
-import Preloader from "./Preloader";
+import Hero from "../components/Hero";
+import ScrollToTop from "../components/ScrollBar";
+import ImageWithSkeleton from "../components/ImageWithSkeleton";
+import Preloader from "../components/Preloader";
 
-const fullImageModules = import.meta.glob("../assets/pics/*.{jpg,png,JPG}");
+interface ImageData {
+  url: string;
+  id: string;
+  order: number;
+}
+
 const heroImageModules = import.meta.glob(
   "../assets/hero-landscape/*.{jpg,png,JPG}"
 );
 
 const ImgDisplay: React.FC = () => {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<ImageData[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentModal, setCurrent] = useState<number>(0);
   const [visibleImages, setVisibleImages] = useState(30); // Initial number of images to display
@@ -20,14 +25,40 @@ const ImgDisplay: React.FC = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
 
+  // Load hero images separately and prioritize them
   useEffect(() => {
-    // Simulate loading process
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500); // Wait for 2 seconds before marking loading as complete
-
-    return () => clearTimeout(timer);
+    const loadHeroImages = async () => {
+      const paths = Object.keys(heroImageModules);
+      const importedImages = await Promise.all(
+        paths.map(
+          (path) => heroImageModules[path]() as Promise<{ default: string }>
+        )
+      );
+      const heroSrcs = importedImages.map((module) => module.default);
+      setHeroImages(heroSrcs);
+      setCurrentHeroImage(
+        heroSrcs[Math.floor(Math.random() * heroSrcs.length)]
+      );
+      setIsLoading(false); // Mark loading as complete after hero images are loaded
+    };
+    loadHeroImages();
   }, []);
+
+  // Hero pictures changing time
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage(
+        heroImages[Math.floor(Math.random() * heroImages.length)]
+      );
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [heroImages]);
+
+  const openModal = (index: number) => {
+    setModalOpen(true);
+    setCurrent(index);
+  };
 
   // Function to load more images
   const loadMoreImages = useCallback(() => {
@@ -51,49 +82,26 @@ const ImgDisplay: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  // Load showcase images
   useEffect(() => {
     const loadImages = async () => {
-      const fullPaths = Object.keys(fullImageModules);
-      const paths = Object.keys(heroImageModules);
-
-      const importedFullImages = await Promise.all(
-        fullPaths.map(
-          (path) => fullImageModules[path]() as Promise<{ default: string }>
-        )
-      );
-
-      const srcs = importedFullImages.map((module) => module.default);
-
-      setImages(srcs);
-      const importedImages = await Promise.all(
-        paths.map(
-          (path) => heroImageModules[path]() as Promise<{ default: string }>
-        )
-      );
-      const heroSrcs = importedImages.map((module) => module.default);
-      setHeroImages(heroSrcs);
-      setCurrentHeroImage(
-        heroSrcs[Math.floor(Math.random() * heroSrcs.length)]
-      );
+      try {
+        const response = await fetch(
+          "https://getphotos-3w3sueupsa-uc.a.run.app"
+        );
+        const data: ImageData[] = await response.json();
+        if (data && data.length > 0) {
+          data.sort((a, b) => a.order - b.order);
+          setImages(data);
+        } else {
+          console.log("json empty");
+        }
+      } catch (error) {
+        console.error("Error fetching initial order:", error);
+      }
     };
-    console.log(currentHeroImage);
     loadImages();
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroImage(
-        heroImages[Math.floor(Math.random() * heroImages.length)]
-      );
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [heroImages]);
-
-  const openModal = (index: number) => {
-    setModalOpen(true);
-    setCurrent(index);
-  };
 
   const variants = {
     hidden: { opacity: 0, y: 50 },
@@ -110,7 +118,7 @@ const ImgDisplay: React.FC = () => {
         Gallery
       </div>
       <div className="container md:mx-auto grid gap-4 md:grid-cols-3 sm:grid-cols-1 min-h-screen">
-        {images.slice(0, visibleImages).map((src, index) => (
+        {images.slice(0, visibleImages).map(({ url, order }, index) => (
           <motion.div
             key={index}
             variants={variants}
@@ -121,8 +129,8 @@ const ImgDisplay: React.FC = () => {
             className="w-full relative"
           >
             <ImageWithSkeleton
-              alt={`Image ${index}`}
-              src={src}
+              alt={`Image ${order}`}
+              src={url}
               className="w-full h-full"
               imgClass="w-full h-full object-cover"
             />
@@ -137,7 +145,7 @@ const ImgDisplay: React.FC = () => {
         checkStatus={modalOpen}
         onClose={() => setModalOpen(false)}
         currentImg={currentModal}
-        imgArray={images}
+        imgArray={images.map((image) => image.url)}
       />
       <ScrollToTop />
     </>
