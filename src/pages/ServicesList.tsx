@@ -100,9 +100,14 @@ const ServicesList: FC = () => {
             <ul className="list-disc pl-4">
               <li>Bridal MakeUp And Hair $699</li>
               <li>Makeup Trial $499</li>
-              <li>Bridesmaid/Mom $299</li>
+              <li>Bridesmaid/Mom (with Bride) $299*</li>
               <li>Groom $168</li>
             </ul>
+            <p className="text-sm mt-6 italic">
+              *The Bridesmaid/Mom price of $299 is only available when included
+              with the Bride's package. For bridesmaid services booked
+              separately, the price is $350.
+            </p>
           </ServiceItem>
           <ServiceItem title="Daily MakeUp And Hair">
             <ul className="list-disc pl-4">
@@ -131,7 +136,7 @@ const ServicesList: FC = () => {
               <li>Between 6-7am $50</li>
               <li>Between 5-6am $100</li>
               <li>Between 4-5am $150</li>
-              <li>Between 4-5am $200</li>
+              <li>Before 4am $200</li>
             </ul>
           </ServiceItem>
           <ServiceItem title="Parking Fee">
