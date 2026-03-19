@@ -1,4 +1,5 @@
 import { useState, FC, ReactNode, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiChevronDown } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
@@ -79,6 +80,11 @@ const ServicesList: FC = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Pricing & Services - Ella Makeup | Bridal Makeup Packages Sydney</title>
+        <meta name="description" content="View Ella Makeup's bridal makeup packages and pricing. Services include wedding day makeup, prewedding photoshoot makeup, and daily makeup in Sydney." />
+        <link rel="canonical" href="https://ellamakeup.com.au/price" />
+      </Helmet>
       {isOverlayVisible && (
         <div className="z-50 bg-zinc-600/70 fixed top-0 left-0 h-screen w-screen flex justify-center items-center text-white">
           <HiMiniXMark

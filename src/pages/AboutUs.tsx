@@ -5,6 +5,7 @@ import wedding from "../assets/svg/ring.svg";
 import quality from "../assets/svg/quality.svg";
 import house from "../assets/svg/house.svg";
 import magic from "../assets/svg/magic.svg";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 
 const AboutUs = () => {
@@ -15,6 +16,11 @@ const AboutUs = () => {
 
   return (
     <>
+      <Helmet>
+        <title>About Ella - Ella Makeup | Expert Bridal Makeup Artist Sydney</title>
+        <meta name="description" content="Meet Ella, a professional makeup artist with over 10 years of experience specializing in Asian bridal makeup in Sydney. 100% client satisfaction rate." />
+        <link rel="canonical" href="https://ellamakeup.com.au/about-us" />
+      </Helmet>
       <div className="w-full flex justify-center">
         <div className="mx-auto max-w-screen-2xl sm:mx-8 pt-8 flex flex-col md:flex-row justify-around items-center gap-4 mb-20 md:mt-[15vh] mt-[8vh]">
           <div className="w-full md:w-1/2 md:h-auto lg:max-w-lg xl:max-w-xl object-contain">

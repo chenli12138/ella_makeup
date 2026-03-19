@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { Helmet } from "react-helmet-async";
 import Modal from "../components/Modal";
 import { motion } from "framer-motion";
 import Hero from "../components/Hero";
@@ -110,6 +111,11 @@ const ImgDisplay: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Ella Makeup - Asian Bridal Makeup Sydney</title>
+        <meta name="description" content="Ella Makeup specializes in Asian bridal makeup in Sydney with over 10 years of experience. Browse our portfolio of stunning bridal transformations." />
+        <link rel="canonical" href="https://ellamakeup.com.au/" />
+      </Helmet>
       <Preloader isLoading={isLoading} />
       {currentHeroImage && (
         <Hero src={currentHeroImage} alt="Hero background image" />
