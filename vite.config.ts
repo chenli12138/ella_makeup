@@ -9,4 +9,20 @@ export default defineConfig({
   },
   // Include JPG files as assets
   assetsInclude: ["**/*.jpg", "**/*.JPG"],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            // Split vendor packages
+            return id
+              .toString()
+              .split("node_modules/")[1]
+              .split("/")[0]
+              .toString();
+          }
+        },
+      },
+    },
+  },
 });
