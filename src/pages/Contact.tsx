@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import emailjs from "@emailjs/browser";
 import { Store } from "react-notifications-component";
 import CustomInput from "../components/CustomInput";
@@ -133,7 +134,13 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12 mt-[10vh] md:mt-[15vh]">
+    <>
+      <Helmet>
+        <title>Contact Us - Ella Makeup | Book Your Bridal Makeup</title>
+        <meta name="description" content="Get in touch with Ella Makeup to book your wedding or bridal makeup in Sydney. Fill out our enquiry form for a quick response." />
+        <link rel="canonical" href="https://ellamakeup.com.au/contact" />
+      </Helmet>
+      <div className="container mx-auto p-4 sm:flex sm:flex-row-reverse sm:justify-between sm:gap-12 mt-[10vh] md:mt-[15vh]">
       <h1 className="block sm:hidden text-4xl mx-auto text-center mb-8 font-medium">
         Contact us
       </h1>
@@ -264,6 +271,7 @@ const ContactUs: React.FC = () => {
         imgClass="max-w-xs sm:max-w-xl max-h-96 object-cover mt-8 mx-auto"
       />
     </div>
+    </>
   );
 };
 
