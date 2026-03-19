@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.11.0",
     "@types/sortablejs": "^1.15.8",
     "emailjs": "^4.0.3",
-    "firebase": "^10.12.3",
+    "firebase": "^12.10.0",
     "framer-motion": "^10.17.9",
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",
@@ -32,7 +32,7 @@
     "react-spinners": "^0.13.8",
     "react-transition-group": "^4.4.5",
     "sortablejs": "^1.15.2",
-    "swiper": "^11.0.5"
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
