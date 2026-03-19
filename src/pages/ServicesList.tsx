@@ -87,7 +87,11 @@ const ServicesList: FC = () => {
             size={30}
           />
           <Link to="/contact">
-            <img src={discountGif} alt="5% discount for bridal makeup" />
+            <img
+              className="h-[70vh] object-cover"
+              src={discountGif}
+              alt="5% discount for bridal makeup"
+            />
           </Link>
         </div>
       )}
